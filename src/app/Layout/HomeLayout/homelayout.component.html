@@ -1,0 +1,101 @@
+<header class="main-header">
+    <!-- Start Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
+        <div class="container">
+            <!-- Start Header Navigation -->
+            <div class="navbar-header">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand navs-img" href=""><img src="../../../assets/images/logo.png" class="logo" alt=""></a>
+            </div>
+            <!-- End Header Navigation -->
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="navbar-menu"> 
+                <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp"> 
+                    <li class="nav-item"><a class="nav-link" (click)="getMode($event.srcElement.text)">Hesabım <i class="fas fa-user"></i> 
+                    </a></li>  
+                    <li class="nav-item"><a class="nav-link" (click)="getMode($event.srcElement.text)">Sepetim<i class="fas fa-shopping-cart"><span class="badge" style="color:red">{{cartCount}}</span> 
+                    </i> 
+                    </a></li>  
+
+                </ul>   
+            </div>  
+        </div>    
+    </nav> 
+</header>   
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container"> 
+   
+    <a class="navbar-brand" routerLink="">Anasayfa</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/Product">Ürünler <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/About">Hakkımızda</a>
+        </li> 
+        <li class="nav-item active">
+          <a class="nav-link"  tabindex="-1" routerLink="/Contact">İletişim</a>
+        </li>
+      </ul> 
+    </div>
+</div>
+  </nav>
+<mat-sidenav-container> 
+    <mat-sidenav mode="over" #sidenavright position="end"[(opened)]="opened">    
+        <div *ngIf="mode == PageModes.Cart">
+                <app-cart [(cart)]="productCart" [(user)]="user"></app-cart>
+        </div>  
+        <div *ngIf="mode==PageModes.View">
+           <app-login [(mode)]="mode"[(login)]="login" [(user)]="user" [(cart)]="productCart" [(cartCount)]="cartCount" ></app-login>
+        </div> 
+            <div  *ngIf="mode==PageModes.Create">
+                <app-new-customer [(mode)]="mode" [(login)]="login" [(user)]="user" ></app-new-customer>
+            </div> 
+           <div *ngIf="mode == PageModes.Loged" class="mt-2 ml-2" style="color: white;">   
+            <app-logged [(mode)]="mode" [(login)]="login" [(user)]="user" [(cartCount)]="cartCount"  ></app-logged>  
+           </div>  
+    
+    </mat-sidenav>
+    <mat-sidenav-content><router-outlet></router-outlet></mat-sidenav-content> 
+</mat-sidenav-container>   
+  <footer>
+        <div class="footer-main">
+            <div class="container">
+                <div class="row"> 
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <div class="FundType">
+                            <h3>Adres</h3>
+                            <p><i class="fas fa-map-marker-alt"></i> blabla<br>No:62 asd - İstanbul</p> 
+                          </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <div class="FundType">
+                            <h3>Sosyal Medya</h3>
+                            <p>Sosyal Medya Hesaplarımızdan bizi takip edin.</p>
+                            <ul class="transparant">
+                                <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fab fa-whatsapp" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+                        <div class="FundType">
+                            <h3>İletişim</h3> 
+                            <p><i class="fas fa-phone-square"></i>  Telefon: <a href="tel:" style="color:white">+90 537 977 15 51  </a></p>
+                            <p><i class="fas fa-envelope"></i>  Email: <a href="mailto:contactinfo@gmail.com" style="color:white"> kuruyemiscim@gmail.com</a></p>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+            <hr>
+        </div>
+    </footer>

@@ -1,0 +1,60 @@
+<div *ngIf="spinnersLoad" class="mt-5 ml-5">
+    <div class="spinner-border text-primary" role="status" style="margin-left: 75px;">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <div class="spinner-border text-secondary" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <div class="spinner-border text-success" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <div class="spinner-border text-danger" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <div class="spinner-border text-warning" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <div class="spinner-border text-info" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <div class="spinner-border text-light" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <div class="spinner-border text-dark" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>    
+</div>
+
+
+<div  *ngIf="!spinnersLoad">
+    <div class="mt-3 ml-4 mr-3" style="color: white;">
+        <h4>Alışveriş Sepeti</h4> 
+            <div *ngIf="products.length == 0">
+                <h5>Sepetiniz Boş</h5>
+                <hr style="border-color:white"> 
+                <i class="fas fa-shopping-cart" style="font-size:350px"></i>
+                <hr style="border-color:white"> 
+            </div>
+        <div *ngIf="products.length != 0">
+            <div *ngFor="let item of products"> 
+                    <hr style="border-color:white"> 
+                <div class="row  mt-2 ">
+                    <div class="col-md-5">
+                        <img style="width: 150px; height: 100px;" class="card-img-top" src="{{item.picture}}" alt="Card image cap">   
+                    </div>
+                    <div class="col-md-5">
+                       <h5>Ad: {{item.name}}</h5>  <h5>Fiyat: {{item.price}}₺</h5>
+                       <h5>Adet: {{item.productCount}}</h5>
+                      
+                </div>   
+                <div class="col-md-2">
+                <a (click)="deleteCart(item.id,item.name,item.productCount)"><i class="fas fa-trash-alt mt-4"  style="font-size:25px; color: Tomato;"></i></a> 
+                </div>
+                <hr style="border-color:white"> 
+            </div>
+        </div>
+        
+              <button style="margin-left: 15%;width: 350px;" (click)="getCreatePage()"  class="btn btn-danger mt-2">Ödeme Yap</button> 
+              <button style="margin-left: 15%;width: 350px;"  (click)="SideBarClose()" class="btn btn-primary mt-2">Alışverişe devam et.</button> 
+        </div>
+</div>

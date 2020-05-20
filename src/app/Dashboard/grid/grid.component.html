@@ -1,0 +1,27 @@
+ <button  [hidden]="createHidden"  (click)="createNew()"  mat-raised-button   color="primary">Create</button> 
+<button   [hidden]="updateHidden"    *ngIf="rowId != undefined"  [routerLink] = "['/Admin/'+updateMode+'',rowId]"   mat-raised-button   color="primary">Update</button>  
+<button  *ngIf="rowId != undefined"  (click)="delete(rowId)"   mat-raised-button   color="primary">Delete</button> 
+<button  [hidden]="emailHidden"    *ngIf="rowId != undefined"  [routerLink] = "['/Admin/'+updateMode+'',rowId]" mat-raised-button   color="primary">Mail Gönder</button>  
+
+  <select style="float:right;" (change)="onPageSizeChanged()" id="page-size">
+    <option value="100" selected="">100</option>
+    <option value="50">50</option>
+    <option value="500">500</option>
+    <option value="1000">1000</option>
+  </select>
+<div class="test-container">
+    <ag-grid-angular
+    #agGrid
+    style="width: 100%; height: 850px;"
+    id="myGrid"
+    class="ag-theme-balham"
+    [paginationNumberFormatter]="paginationNumberFormatter"
+    [pagination]="true"
+    [rowModelType]="rowModelType"
+    [columnDefs]="columnDefs"
+    [rowSelection]="rowSelection"
+    [rowData]="rowData"
+    (selectionChanged)="onSelectionChanged($event)"
+    (gridReady)="onGridReady($event)"
+  ></ag-grid-angular>
+</div>

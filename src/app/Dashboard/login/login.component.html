@@ -1,0 +1,22 @@
+<div class="loginFrm container mt-3" style="color: white;">
+  <h4>HOŞ GELDİNİZ</h4>
+<h5>HIZLI VE GÜVENLİ ALIŞVERİŞE GİRİŞ YAPIN! </h5>
+  <form (ngSubmit) = "onSubmit()"  [formGroup] = "loginCustomer">  
+    <div class="form-container"> 
+      <mat-form-field>
+        <input required formControlName = "email"matInput placeholder="Email"> 
+        <mat-error *ngIf="getControls.email.invalid">{{validation.GetValidationMessages(getControls.email,"Email")}}</mat-error> 
+      </mat-form-field>
+      <mat-form-field>
+        <input required formControlName = "password"   matInput placeholder="Şifre"> 
+        <mat-error *ngIf="getControls.password.invalid">{{validation.GetValidationMessages(getControls.password,"Şifre")}}</mat-error> 
+      </mat-form-field>
+    </div> 
+    <button  style="margin-left: 15%;width: 350px;" class="mt-2"  type="submit" mat-raised-button color="primary">Giriş</button> 
+  </form> 
+  <hr style="border-color:white"> 
+  <h4>HENÜZ ÜYE DEĞİL MİSİNİZ?</h4>
+  <h5>Kolayca üye olabilirsiniz.</h5>
+  <button style="margin-left: 15%;width: 350px;" (click)="getCreatePage()"  class="btn btn-danger mt-2">Üye Ol</button> 
+  <button style="margin-left: 15%;width: 350px;"  (click)="facebookLogin()" class="btn btn-primary mt-2">Facebook İle Giriş Yap</button> 
+</div> 

@@ -1,0 +1,29 @@
+ 
+ 
+     <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <form style="margin-top: 75px;"   (ngSubmit) = "onSubmit()" [formGroup] = "CustomerEmailForm">
+                    <div class="form-container">
+                        <mat-form-field>
+                            <input formControlName = "Email" id="Name"   matInput placeholder="Email*">
+                            <mat-error *ngIf="getControls.Email.invalid">{{validation.GetValidationMessages(getControls.Email,"Email")}}</mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input formControlName = "Subject" id="Picture"     matInput placeholder="Konu*">
+                            <mat-error *ngIf="getControls.Subject.invalid">{{validation.GetValidationMessages(getControls.Subject,"Konu")}}</mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="fill">
+                            <mat-label>İçerik</mat-label>
+                            <textarea  formControlName = "Content" matInput></textarea>
+                            <mat-error *ngIf="getControls.Content.invalid">{{validation.GetValidationMessages(getControls.Content,"İçerik")}}</mat-error>
+                          </mat-form-field>  
+                    </div>
+                    <button mat-raised-button style="margin-top:5px;"   [routerLink] = "['/Admin/Customer']"  color="warn">İptal</button> 
+                    <button style="margin-left:5px;" type="submit" [disabled] ="loading" mat-raised-button color="primary">
+                       Kaydet <span *ngIf="loading" class="spinner-border spinner-border-sm" role = "status" aria-hidden="true"></span>
+                    </button>
+                </form>
+            </div>  
+        </div>
+    </div> 

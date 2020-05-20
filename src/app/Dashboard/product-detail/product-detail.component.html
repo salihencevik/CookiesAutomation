@@ -1,0 +1,40 @@
+<div class="all-title-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Ürün Detay</h2>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item">Ürün Detay</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+  </div>  
+
+  <div class="container mb-5">
+    <div class="card">
+        <div class="container-fliud">
+            <div class="wrapper row">
+                <div class="preview col-md-6">
+                    
+                    <div class="preview-pic tab-content">
+                      <div class="tab-pane active" id="pic-1"><img src="{{product.picture}}" /></div> 
+                    </div> 
+                </div>
+                <div class="details col-md-6">
+                    <h3 class="product-title">{{product.name}}</h3>
+                    <p><span style="color:red">Kategori:</span> {{product.categoryName}}</p>
+                    <p class="product-description">{{product.feature}} </p>
+                    <h4 class="price">Ürün Fiyatı: <span>{{product.price}}₺</span></h4>
+                    <div class="action">
+                        <ngx-number-spinner
+                        [value]="1"
+                        (change)="spinnerChange($event)" 
+                        [min]="1">
+                         </ngx-number-spinner> 
+                        <button  class="mt-3 add-to-cart btn btn-default" (click)="submit(product.id)" type="button">Sepete Ekle</button>  
+                     </div>
+            </div>
+        </div>
+    </div>
+</div> 

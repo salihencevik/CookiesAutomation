@@ -1,0 +1,42 @@
+ 
+ 
+     <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <form style="margin-top: 75px;" [formGroup] = "productUpdateForm">
+                    <div class="form-container">
+                        <mat-form-field>
+                            <input formControlName = "Name" id="Name"   matInput placeholder="Ürün Adı*">
+                            <mat-error *ngIf="getControls.Name.invalid">{{validation.GetValidationMessages(getControls.Name,"Adı")}}</mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Açıklama</mat-label>
+                            <textarea  formControlName = "Feature" matInput></textarea>
+                            <mat-error *ngIf="getControls.Feature.invalid">{{validation.GetValidationMessages(getControls.Feature,"Özellik")}}</mat-error>
+                          </mat-form-field> 
+                        <mat-form-field>
+                            <input formControlName = "Picture" id="Picture"     matInput placeholder="Resim*">
+                            <mat-error *ngIf="getControls.Picture.invalid">{{validation.GetValidationMessages(getControls.Picture,"Resim")}}</mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input formControlName = "Price" id="Price" matInput placeholder="Fiyat*"  >
+                            <mat-error *ngIf="getControls.Price.invalid">{{validation.GetValidationMessages(getControls.Price,"Fiyat")}}</mat-error>
+                        </mat-form-field>
+                        <mat-form-field style="margin-top: 5px;">
+                            <input  type="text"  autocomplete="off" value="result.categoryName" placeholder="Kategori*" id="Category" formControlName = "CategoryName" matInput [matAutocomplete]="auto">
+                            <mat-error *ngIf="getControls.CategoryName.invalid">{{validation.GetValidationMessages(getControls.CategoryName,"Kategori")}}</mat-error>
+                        <mat-autocomplete [displayWith] = "displayCategoryName" #auto = "matAutocomplete">
+                            <mat-option *ngFor="let item of categoryList" [value]="item">
+                              {{item.categoryName}}
+                            </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
+                    </div>
+                    <button mat-raised-button style="margin-top:5px;"   [routerLink] = "['/Admin/Product']"  color="warn">İptal</button> 
+                    <button style="margin-left:5px;" type="submit" [disabled] ="loading" mat-raised-button color="primary">
+                       Kaydet <span *ngIf="loading" class="spinner-border spinner-border-sm" role = "status" aria-hidden="true"></span>
+                    </button>
+                </form>
+            </div>  
+        </div>
+    </div> 

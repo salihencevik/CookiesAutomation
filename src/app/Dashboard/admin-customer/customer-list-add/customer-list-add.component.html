@@ -1,0 +1,5 @@
+<div *ngIf="mode == PageModes.List">
+    <app-grid  [entityName]="'Customer'"    [emailHidden] = "false"  [createHidden] = "true" [updateHidden] = "true"   [(columns)]="columns"  [(mode)]="mode" [updateMode]="'CustomerEmail'" ></app-grid>
+ </div>
+
+ 

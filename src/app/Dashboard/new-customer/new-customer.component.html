@@ -1,0 +1,28 @@
+<div class="container">
+    <h2 style="color: white; left:15%" class="mt-2" >Kayıt Ol</h2> 
+    <form (ngSubmit) = "onSubmit()"  [formGroup] = "newCustomer"> 
+        <div class="form-container">
+            <mat-form-field>
+                <input required formControlName = "name" id="Name" matInput placeholder="Ad-Soyad"> 
+                <mat-error *ngIf="getControls.name.invalid">{{validation.GetValidationMessages(getControls.name,"Adı")}}</mat-error> 
+            </mat-form-field> 
+            <mat-form-field>
+                <input required formControlName = "email" id="Name" matInput placeholder="Email"> 
+                <mat-error *ngIf="getControls.email.invalid">{{validation.GetValidationMessages(getControls.email,"Email")}}</mat-error>
+
+            </mat-form-field>
+            <mat-form-field>
+                <input required formControlName = "password" id="Name" matInput placeholder="Şifre"> 
+                <mat-error *ngIf="getControls.password.invalid">{{validation.GetValidationMessages(getControls.password,"Şifre")}}</mat-error>
+
+            </mat-form-field>
+            <mat-form-field>
+                <input required formControlName = "password2" id="Name" matInput placeholder="Şifre(Tekrar)"> 
+                <mat-error *ngIf="getControls.password2.invalid">{{validation.GetValidationMessages(getControls.password2,"Şifre Tekrarı")}}</mat-error> 
+            </mat-form-field>
+            <p style="color:red" *ngIf="passwordCheck">Şifreler birbirine uymuyor.</p>
+            <button  style="margin-left: 15%;width: 350px;" class="mt-2"  type="submit" mat-raised-button color="primary">Üye Ol</button>
+            <button style="margin-left: 15%;width: 350px;" (click)="getLoginPage()"  class="btn btn-danger mt-2">Geri</button>  
+        </div>  
+    </form>
+</div>
