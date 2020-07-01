@@ -29,6 +29,7 @@ export class NewCustomerComponent implements OnInit {
     this.newCustomer = this.fb.group({
       name:new FormControl("",Validators.required), 
       email:new FormControl("",[Validators.required,Validators.email]),
+      adress:new FormControl("",[Validators.required]),
       password:new FormControl("",[Validators.required,Validators.maxLength(6)]),
       password2:new FormControl("",[Validators.required,Validators.maxLength(6)])
     }); 
@@ -38,9 +39,10 @@ export class NewCustomerComponent implements OnInit {
   } 
   onSubmit(){
     if (this.newCustomer.valid) {
+      debugger;
       var customer = this.newCustomer.value;
     if (customer.password == customer.password2) {
-      this.defaultService.add(this.url,this.newCustomer.value).subscribe(data => {
+      this.defaultService.addCustomer(this.url,this.newCustomer.value).subscribe(data => {
         if (data == false) { 
           this.snackBar.open("Bu Email Kullanılıyor!")
         }

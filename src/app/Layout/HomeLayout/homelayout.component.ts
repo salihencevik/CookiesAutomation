@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core'; 
+import { Component, OnInit, ViewChild, ViewChildren, AfterViewInit } from '@angular/core'; 
 import { PageMode } from 'src/app/Enum/PageMode';  
 import { ProductService } from 'src/app/Service/Product/product.service';
 import { SnackBarService } from 'src/app/Service/SnackBar/snackbar.service';
@@ -8,6 +8,7 @@ import { Customer } from 'src/app/Model/Customer';
 import { CartComponent } from 'src/app/Dashboard/cart/cart.component';
 import { ProductComponent } from 'src/app/Dashboard/product/product.component';
 import { Router } from '@angular/router';
+import { CartService } from 'src/app/Service/cart/cart.service';
 
 @Component({
   selector: 'app-homelayout',
@@ -15,7 +16,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./homelayout.component.css']
 })
 
-export class HomelayoutComponent implements OnInit {
+export class HomelayoutComponent implements OnInit  { 
   PageModes = PageMode;  
   mode = PageMode.View;  
   cartCount:number;
@@ -25,15 +26,16 @@ export class HomelayoutComponent implements OnInit {
   login:boolean = false; 
   item:number; 
   productCart = []; 
-  product; 
-  cartControll = [];
-  user;
-  constructor (private productService:ProductService,private snackBar:SnackBarService,private defaultService:DefaultService<Customer>,private router:Router) {
+  cartList = [];
+  product;  
+  user; 
+  constructor (private cartService:CartService,private productService:ProductService,private snackBar:SnackBarService,private defaultService:DefaultService<Customer>,private router:Router) {
    this.item = +localStorage.getItem("customerId");    
    this.productCart = JSON.parse(localStorage.getItem("product")); 
    this.cartCount = +localStorage.getItem("cartCount");   
-   }  
-  ngOnInit() {    
+   }   
+  ngOnInit() {  
+    debugger;
     if (this.item != 0) {
       this.logged(this.item);
     } 
@@ -42,8 +44,9 @@ export class HomelayoutComponent implements OnInit {
     } 
   }    
   getMode(event){
+    var query = +localStorage.getItem("customerId");    
     if(event == "Hesabım "){
-      if (this.item != 0) {
+      if (query != 0) {
         this.mode = PageMode.Loged
         this.opened =  true;
         this.login = true;
@@ -60,49 +63,18 @@ export class HomelayoutComponent implements OnInit {
       this.mode = PageMode.Cart
     }
   } 
-  cartCreate(id:number){   
-    debugger;
-    if (this.productCart == null) {
-      this.cartControll.push(id);
-      localStorage.setItem("product",JSON.stringify(this.cartControll));   
-      this.productCart = JSON.parse(localStorage.getItem("product"));  
-      this.cartCount = this.productCart.length; 
-      Swal.fire({
-        icon: 'success',
-        text: "Ürün Sepete Eklendi!",
-         showConfirmButton: true,
-      })   
-    }
-    else{
-      this.productCart = JSON.parse(localStorage.getItem("product"));  
-      this.productCart.push(id)
-      localStorage.setItem("product",JSON.stringify(this.productCart));  
-      this.cartCount = this.productCart.length;
-      Swal.fire({
-        icon: 'success',
-        text: "Ürün Sepete Eklendi!",
-         showConfirmButton: true,
-      })   
-    }  
-    if(this.item == null){
-      this.mode == this.PageModes.View;
-    }else{
-      this.mode == this.PageModes.Loged;
-    }
-  }
+  
   cartlocalStorage(productCart){  
   this.cartCount = this.productCart.length 
   }
-  logged(id:number){ 
-    debugger;
-      this.defaultService.getItemId(this.ApiName,this.item).subscribe(data => { 
-        console.log(data);
-         this.user = data;
-         this.login = true;
-      }); 
+  logged(id:number){   
+      this.defaultService.getItemId(this.ApiName,this.item).subscribe(data => {  
+      this.user = data;
+      this.login = true; 
+      this.cartCount = this.user.cartList.length
+    });
   }
-  public getProductForCart(model:[]){ 
-
+  public getProductForCart(model:[]){  
     model.forEach(element => { 
       this.productService.getProductId(element).subscribe(data => { 
       });

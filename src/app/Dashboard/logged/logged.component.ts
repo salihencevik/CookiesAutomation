@@ -19,6 +19,7 @@ export class LoggedComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {   
+    console.log(this.user)
   } 
    logout(){
     localStorage.removeItem("customerId"); 

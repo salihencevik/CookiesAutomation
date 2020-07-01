@@ -17,5 +17,8 @@ export class AdminlayoutComponent implements OnInit {
 
   ngOnInit() {
   }
-
+logout(){
+  localStorage.removeItem("UserId")
+  this.router.navigateByUrl('UserLogin');
+}
 }

@@ -3,8 +3,11 @@
      <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <form style="margin-top: 75px;" [formGroup] = "productUpdateForm">
+                <form style="margin-top: 75px;"  (ngSubmit) = "onSubmit()" [formGroup] = "productUpdateForm">
                     <div class="form-container">
+                        <mat-form-field hidden>
+                            <input formControlName = "Id" id="Id"   matInput placeholder="Id*"> 
+                        </mat-form-field>
                         <mat-form-field>
                             <input formControlName = "Name" id="Name"   matInput placeholder="Ürün Adı*">
                             <mat-error *ngIf="getControls.Name.invalid">{{validation.GetValidationMessages(getControls.Name,"Adı")}}</mat-error>
@@ -23,8 +26,8 @@
                             <mat-error *ngIf="getControls.Price.invalid">{{validation.GetValidationMessages(getControls.Price,"Fiyat")}}</mat-error>
                         </mat-form-field>
                         <mat-form-field style="margin-top: 5px;">
-                            <input  type="text"  autocomplete="off" value="result.categoryName" placeholder="Kategori*" id="Category" formControlName = "CategoryName" matInput [matAutocomplete]="auto">
-                            <mat-error *ngIf="getControls.CategoryName.invalid">{{validation.GetValidationMessages(getControls.CategoryName,"Kategori")}}</mat-error>
+                            <input  type="text"  autocomplete="off" value="result.Category" placeholder="Kategori*" id="Category" formControlName = "Category" matInput [matAutocomplete]="auto">
+                            <mat-error *ngIf="getControls.Category.invalid">{{validation.GetValidationMessages(getControls.Category,"Kategori")}}</mat-error>
                         <mat-autocomplete [displayWith] = "displayCategoryName" #auto = "matAutocomplete">
                             <mat-option *ngFor="let item of categoryList" [value]="item">
                               {{item.categoryName}}

@@ -1,8 +1,10 @@
+import { Category } from './Category';
+
 export class Cookies { 
-    Id:number;
+    id:number;
     Name:string;
     Feature:string;
-    Price:number;
-    Picture:string;
-  id: number;
+    Price:string;
+    Picture:string; 
+    CategoryId:number
 }

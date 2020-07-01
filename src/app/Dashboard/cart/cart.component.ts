@@ -22,10 +22,13 @@ export class CartComponent implements OnInit {
   CustomerlogedCart: number[] = [];
   productCount;
   productPrice;
-  constructor(private homeCom:HomelayoutComponent,private productService:ProductService) {  
-    this.customerId = +localStorage.getItem("customerId");     
+  totalCount;
+  productCart;
+  constructor(private homeCom:HomelayoutComponent,private productService:ProductService,private cartService:CartService) {  
+    this.customerId = +localStorage.getItem("customerId");    
+    this.productCart = JSON.parse(localStorage.getItem("product"));  
   }
-  ngOnInit() {     
+  ngOnInit() {      
     debugger;
     if(this.user != null){ 
       this.getProductForUser();
@@ -35,31 +38,27 @@ export class CartComponent implements OnInit {
         this.getlogedCart();
       }
     } 
-    if(this.cart != null){
-      this.getProduct(this.cart);
+    if(this.productCart != null){
+      this.getProduct(this.productCart);
     }    
       this.spinnersLoad = false 
   }   
-  getlogedCart(){  
-    debugger;
-    console.log(this.customerId)
+  getlogedCart(){   
         this.product = this.user;
         this.product.forEach(element => { 
           this.CustomerlogedCart.push(element.cookiesId);
         });  
         this.getProduct(this.CustomerlogedCart);
-  }
-
-  public getProduct(model: number[]){ 
-    debugger; 
+  }  
+  public getProduct(model: number[]){   
     model.forEach(element => { 
         this.productService.getProductForCart(element).subscribe(data => {  
           debugger;
           this.productCount = 0;   
           this.product = data; 
           this.productPrice = 0;
-          if(this.cart != null) {
-            this.cart.forEach(cartcount => {
+          if(this.productCart != null) {
+            this.productCart.forEach(cartcount => {
               debugger; 
               if(element == cartcount){
                   this.productCount = this.productCount + 1;
@@ -71,7 +70,7 @@ export class CartComponent implements OnInit {
               debugger; 
               if(element == cartcount){
                   this.productCount = this.productCount + 1;
-                  this.productPrice = this.productPrice + this.product.price;
+                  this.productPrice = this.productPrice + this.product.price; 
               }
             });  
           }
@@ -80,6 +79,7 @@ export class CartComponent implements OnInit {
             var result = this.products.find(f=>f.id == element);
             if (result == null) {
               this.products.push(data);  
+              console.log(this.products)
               this.spinnersLoad = false;
             } 
             this.product.productCount = this.productCount;  
@@ -89,21 +89,20 @@ export class CartComponent implements OnInit {
     });
     this.spinnersLoad = false;
   }
-  getProductForUser(){
-    debugger;
+  getProductForUser(){ 
     for (let index = 0; index < this.user.cartList.length; index++) {
-      this.productService.getProductForCart(this.user.cartList[index].productId).subscribe(data => {  
+      this.productService.getProductForCart(this.user.cartList[index]).subscribe(data => {  
         this.productCount = 0;   
         this.product = data;  
         this.productPrice = 0; 
         for (let cartcount = 0; cartcount < this.user.cartList.length; cartcount++) { 
-          if(this.user.cartList[index].productId == this.user.cartList[cartcount].productId){
+          if(this.user.cartList[index] == this.user.cartList[cartcount]){
             this.productCount = this.productCount + 1;
             this.productPrice = this.productPrice + this.product.price;
           }  
         }   
         if(this.productCount != 0){
-          var result = this.products.find(f=>f.id == this.user.cartList[index].productId);
+          var result = this.products.find(f=>f.id == this.user.cartList[index]);
           if (result == null) { 
             this.products.push(data);  
             this.spinnersLoad = false;
@@ -122,8 +121,44 @@ export class CartComponent implements OnInit {
   deleteCart(id:number,ProductName:string,ProductCount:number){
     if(this.customerId == 0){
       this.deleteCartForLogout(id,ProductName,ProductCount)
+    }else{
+      this.deleteCartForLogin(id,ProductName,ProductCount);
     }
   }
+  deleteCartForLogin(id:number,ProductName:string,ProductCount:number){ 
+        Swal.fire({
+      title:  ProductName + " sepetinizden çıkarılaktır.", 
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Evet Çıkar',
+      cancelButtonText: 'Hayır Vazgeç',
+      reverseButtons: true
+    }).then((willDelete) => {
+      if (willDelete.value) {  
+        debugger;
+        this.spinnersLoad = true; 
+        this.cartService.deleteCart(id,this.customerId).subscribe(data =>{
+          this.spinnersLoad = false;    
+          this.deleteProduct = this.user.cartList;
+          console.log(this.deleteProduct)
+          this.products = [];
+          this.cart = [];
+          this.deleteProduct.forEach(element => {
+            debugger;
+            if (element != id) { 
+              this.cart.push(element) 
+            } 
+          });
+          this.user.cartList = this.cart;
+          if (this.cart != null) {
+            this.getProduct(this.cart)
+          }else{
+            this.products.length = 0;
+          }
+        })
+      }
+    }) 
+  } 
   deleteCartForLogout(id:number,ProductName:string,ProductCount:number){
     Swal.fire({
       title:  ProductName + " sepetinizden çıkarılaktır.", 

@@ -1,0 +1,24 @@
+<div *ngIf="mode == PageModes.List">
+    <app-grid  [entityName]="'Categories'" [updateMode]="'CategoryUpdate'"    [(columns)]="columns"  [(mode)]="mode" [updateMode]="'CustomerEmail'" ></app-grid>
+ </div>
+ <div *ngIf="mode == PageModes.Create"> 
+    <div class="container">
+       <div class="row">
+           <div class="col-md-12">
+               <form style="margin-top: 75px;" (ngSubmit) = "onSubmit()"  [formGroup] = "categoryForm">
+                   <div class="form-container">
+                       <mat-form-field>
+                           <input formControlName = "categoryName" id="Name" value=""  matInput placeholder="Kategori Adı*">
+                           <mat-error *ngIf="getControls.categoryName.invalid">{{validation.GetValidationMessages(getControls.categoryName,"Kategori Adı")}}</mat-error>
+                       </mat-form-field> 
+                   </div>
+                   <button mat-raised-button style="margin-top:5px;"  (click)="cancelButton()" color="warn">İptal</button> 
+                   <button style="margin-left:5px;" type="submit" [disabled] ="loading" mat-raised-button color="primary">
+                      Kaydet <span *ngIf="loading" class="spinner-border spinner-border-sm" role = "status" aria-hidden="true"></span>
+                   </button>
+               </form>
+           </div>
+       </div>
+   </div>
+</div> 
+ 

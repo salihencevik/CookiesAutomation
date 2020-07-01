@@ -5,6 +5,9 @@ import { ValidationService } from 'src/app/Service/validation/validation.service
 import { DefaultService } from 'src/app/Service/defaultService/default.service';
 import { Category } from 'src/app/Model/Category';
 import { GridComponent } from '../../grid/grid.component';
+import { Cookies } from 'src/app/Model/Cookies';
+import { ProductService } from 'src/app/Service/Product/product.service';
+import { CategoryService } from 'src/app/Service/Category/category.service';
 
 @Component({
   selector: 'app-admin-product',
@@ -16,10 +19,11 @@ export class AdminProductComponent implements OnInit {
 
   PageModes = PageMode;
   mode = PageMode.List;  
+  categoryList:Category[];
   productForm:FormGroup;
-  constructor(public validation:ValidationService,private fb: FormBuilder,private defaultService:DefaultService<Category>) { }
+  constructor(private categoryService:CategoryService,public validation:ValidationService,private fb: FormBuilder,private defaultService:DefaultService<Cookies>,private productService:ProductService) { }
   columns: any[];
-  categoryList;
+  ;
   ngOnInit() {
     this.getCategory();
     this.productForm = this.fb.group({
@@ -42,7 +46,7 @@ export class AdminProductComponent implements OnInit {
     return this.productForm.controls;
   }
   getCategory(){
-    this.defaultService.getItems("Categories").subscribe(data => {
+    this.categoryService.getCategory().subscribe((data:any) => {
       this.categoryList = data;
       console.log(this.categoryList)
     })
@@ -52,5 +56,12 @@ export class AdminProductComponent implements OnInit {
   }
   cancelButton(){
     this.mode = PageMode.List 
-  }  
+  }   
+  onSubmit(){
+    if (this.productForm.valid){  
+      this.productService.postProduct(this.productForm.value).subscribe(data => {
+        this.mode = PageMode.List 
+      })
+    }
+  }
 }

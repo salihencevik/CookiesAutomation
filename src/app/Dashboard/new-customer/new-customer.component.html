@@ -9,15 +9,17 @@
             <mat-form-field>
                 <input required formControlName = "email" id="Name" matInput placeholder="Email"> 
                 <mat-error *ngIf="getControls.email.invalid">{{validation.GetValidationMessages(getControls.email,"Email")}}</mat-error>
-
             </mat-form-field>
             <mat-form-field>
-                <input required formControlName = "password" id="Name" matInput placeholder="Şifre"> 
+                <input required formControlName = "adress" id="Name" matInput placeholder="Adres"> 
+                <mat-error *ngIf="getControls.adress.invalid">{{validation.GetValidationMessages(getControls.adress,"Adres")}}</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <input required  type="password" formControlName = "password" id="Name" matInput placeholder="Şifre"> 
                 <mat-error *ngIf="getControls.password.invalid">{{validation.GetValidationMessages(getControls.password,"Şifre")}}</mat-error>
-
             </mat-form-field>
             <mat-form-field>
-                <input required formControlName = "password2" id="Name" matInput placeholder="Şifre(Tekrar)"> 
+                <input required type="password" formControlName = "password2" id="Name" matInput placeholder="Şifre(Tekrar)"> 
                 <mat-error *ngIf="getControls.password2.invalid">{{validation.GetValidationMessages(getControls.password2,"Şifre Tekrarı")}}</mat-error> 
             </mat-form-field>
             <p style="color:red" *ngIf="passwordCheck">Şifreler birbirine uymuyor.</p>

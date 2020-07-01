@@ -1,6 +1,6 @@
 import { Cart } from './Cart';
 
-export class Customer { 
+export  class Customer { 
     Id:number;
     name:string; 
     email:string;

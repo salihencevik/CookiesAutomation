@@ -7,7 +7,7 @@
      <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <form style="margin-top: 75px;" [formGroup] = "productForm">
+                <form style="margin-top: 75px;"  (ngSubmit) = "onSubmit()"  [formGroup] = "productForm">
                     <div class="form-container">
                         <mat-form-field>
                             <input formControlName = "Name" id="Name" value=""  matInput placeholder="Ürün Adı*">

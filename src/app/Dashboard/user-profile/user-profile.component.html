@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form style="margin-top: 100px;"  class="mb-5" (ngSubmit) = "onSubmit()" [formGroup] = "UserProfileForm">
+            <div class="form-container">
+                <mat-form-field hidden>
+                    <input formControlName = "Id"   matInput placeholder="İsim-Soyisim*"> 
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName = "Name"  matInput placeholder="İsim-Soyisim*">
+                    <mat-error *ngIf="getControls.Name.invalid">{{validation.GetValidationMessages(getControls.Name,"Konu")}}</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName = "Adress"  matInput placeholder="Adress*">
+                    <mat-error *ngIf="getControls.Adress.invalid">{{validation.GetValidationMessages(getControls.Adress,"Adres")}}</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName = "Email"  matInput placeholder="Email*">
+                    <mat-error *ngIf="getControls.Email.invalid">{{validation.GetValidationMessages(getControls.Email,"Email")}}</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName = "Phone"   matInput placeholder="Telefon Numarası*">
+                    <mat-error *ngIf="getControls.Phone.invalid">{{validation.GetValidationMessages(getControls.Phone,"Email")}}</mat-error>
+                </mat-form-field>
+                <h5 style="color:red">Şifre Güncelle</h5> 
+                <mat-form-field>
+                    <input formControlName = "Password"  type="password"  (change)="newPassword($event.currentTarget.value)"   matInput placeholder="Şifre*">
+                    <mat-error *ngIf="getControls.Password.invalid">{{validation.GetValidationMessages(getControls.Password,"Şifre")}}</mat-error>
+                    
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName = "Password2"   type="password" [required]="isConditionIsTrue"  matInput placeholder="Yeni Şifre">
+                    <mat-error *ngIf="getControls.Password2.invalid">{{validation.GetValidationMessages(getControls.Password2,"Yeni Şifre")}}</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName = "Password3"  type="password" [required]="isConditionIsTrue"    matInput placeholder="Yeni Şifre(Tekrar)">
+                    <mat-error *ngIf="getControls.Password3.invalid">{{validation.GetValidationMessages(getControls.Password3,"Yeni Şifre(Tekrar)")}}</mat-error>
+                </mat-form-field>
+            </div>
+            <button style="margin-bottom:100px; margin-left:5px;" type="submit" [disabled] ="loading" mat-raised-button color="primary">
+                Kaydet <span *ngIf="loading" class="spinner-border spinner-border-sm" role = "status" aria-hidden="true"></span>
+             </button>
+            </form>
+        </div> 
+    </div>
+</div>

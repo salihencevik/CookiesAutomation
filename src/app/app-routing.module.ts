@@ -14,6 +14,11 @@ import { CustomerUpdateComponent } from './Dashboard/admin-customer/customer-upd
 import { AdminPanelLoginComponent } from './Dashboard/admin-panel-login/admin-panel-login.component';
 import { AuthGuard } from './Service/auth/auth.guard';
 import { LoginComponent } from './Dashboard/login/login.component';
+import { UserProfileComponent } from './Dashboard/user-profile/user-profile.component';
+import { PaymentComponent } from './Dashboard/payment/payment.component';
+import { SaledProductComponent } from './Dashboard/saled-product/saled-product.component';
+import { AdminCategoryComponent } from './Dashboard/admin-category/admin-category.component';
+import { AdminCategoryUpdateComponent } from './Dashboard/admin-category-update/admin-category-update.component';
 
 
 const routes: Routes = [ 
@@ -27,7 +32,10 @@ const routes: Routes = [
         {path:"Product",component:ProductComponent},
         {path:"Product/:productName",component:ProductComponent},
         {path:"About",component:AboutComponent},   
-        {path:"Product/Detail/:id",component:ProductDetailComponent},    
+        {path:"User/Saled/:id",component:SaledProductComponent},   
+        {path:"Product/Detail/:id",component:ProductDetailComponent},  
+        {path:"User/Profile/:id",component:UserProfileComponent},    
+        {path:"Payment",component:PaymentComponent},      
       ]
     }],
   },   
@@ -36,7 +44,10 @@ const routes: Routes = [
     {path:"Product",component:AdminProductComponent},
     {path:"ProductUpdate/:id",component:ProductUpdateComponent},
     {path:"Customer",component:CustomerListAddComponent},
+    {path:"Category",component:AdminCategoryComponent},
+    {path:"CategoryUpdate/:id",component:AdminCategoryUpdateComponent},
     {path:"CustomerEmail/:id",component:CustomerUpdateComponent},
+    
   ]}, 
   {path:"UserLogin",component:AdminPanelLoginComponent},
 ];

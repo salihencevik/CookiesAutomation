@@ -5,6 +5,7 @@ import { Router ,ActivatedRoute} from '@angular/router';
 import { ValidationService } from 'src/app/Service/validation/validation.service'; 
 import { Customer } from 'src/app/Model/Customer';
 import { CustomerService } from 'src/app/Service/customer/customer.service';
+import { HomelayoutComponent } from 'src/app/Layout/HomeLayout/homelayout.component';
 @Component({
   selector: 'app-customer-update',
   templateUrl: './customer-update.component.html',
@@ -16,7 +17,7 @@ export class CustomerUpdateComponent implements OnInit {
   CustomerEmailForm:FormGroup;
   constructor(private defaultService:DefaultService<Customer>,public validation:ValidationService,private router:Router,private route:ActivatedRoute,private customerService:CustomerService) { }
 
-  ngOnInit() {
+  ngOnInit() { 
     this.customerId = Number(this.route.snapshot.paramMap.get("id"));
     this.defaultService.getCustomerId("Customer",this.customerId).subscribe(data => {
       console.log(data);

@@ -56,14 +56,11 @@
            </div>
             <img style="width: 100%; height: 250px; object-fit: cover;" src="{{item.picture}}" class="card-img-top" alt="...">
             <div class="card-body">
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.
-                Some quick example text to build on the card title and make up the bulk of the card's content.
-                Some quick example text to build on the card title and make up the bulk of the card's content.
-                Some quick example text to build on the card title and make up the bulk of the card's content.
+              <p class="card-text"> {{item.feature}}
               </p>
             </div>
             <button class="btn btn-success"  [routerLink]="['/Product/Detail',item.id]">İncele</button>
-            <button class="btn btn-primary mt-3" (click)="createCart(item.id)">Sepete Ekle</button>
+            <button class="btn btn-primary mt-3" (click)="cartCreate(item.id)">Sepete Ekle</button>
           </div> 
         </div>
      </div> 

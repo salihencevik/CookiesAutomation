@@ -30,7 +30,7 @@
     <div class="mt-3 ml-4 mr-3" style="color: white;">
         <h4>Alışveriş Sepeti</h4> 
             <div *ngIf="products.length == 0">
-                <h5>Sepetiniz Boş</h5>
+                <h5>Sepetiniz Boş  </h5>
                 <hr style="border-color:white"> 
                 <i class="fas fa-shopping-cart" style="font-size:350px"></i>
                 <hr style="border-color:white"> 
@@ -52,9 +52,8 @@
                 </div>
                 <hr style="border-color:white"> 
             </div>
-        </div>
-        
-              <button style="margin-left: 15%;width: 350px;" (click)="getCreatePage()"  class="btn btn-danger mt-2">Ödeme Yap</button> 
+        </div> 
+              <button style="margin-left: 15%;width: 350px;" [routerLink] = "['/Payment']"  class="btn btn-danger mt-2">Ödeme Yap</button> 
               <button style="margin-left: 15%;width: 350px;"  (click)="SideBarClose()" class="btn btn-primary mt-2">Alışverişe devam et.</button> 
         </div>
 </div>

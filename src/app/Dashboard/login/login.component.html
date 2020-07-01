@@ -8,7 +8,7 @@
         <mat-error *ngIf="getControls.email.invalid">{{validation.GetValidationMessages(getControls.email,"Email")}}</mat-error> 
       </mat-form-field>
       <mat-form-field>
-        <input required formControlName = "password"   matInput placeholder="Şifre"> 
+        <input required formControlName = "password" type="password"   matInput placeholder="Şifre"> 
         <mat-error *ngIf="getControls.password.invalid">{{validation.GetValidationMessages(getControls.password,"Şifre")}}</mat-error> 
       </mat-form-field>
     </div> 

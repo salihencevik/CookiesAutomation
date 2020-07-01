@@ -1,0 +1,6 @@
+.card-text{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* kaç satırla sınırlayacağımızı yazıyoruz */
+    -webkit-box-orient: vertical;
+  }

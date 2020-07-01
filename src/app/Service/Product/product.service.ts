@@ -16,6 +16,11 @@ export class ProductService {
         this.product = x;
       })); 
   }
+  postProduct(cookies:Cookies){
+    debugger;
+    let api = this.apiUrl
+    return this.httpClient.post(api,cookies);
+  }
   getProductId(id:number) {
     let api = this.apiUrl + "getProduct" + "/" + id;
     return this.httpClient.get<Cookies>(api).pipe(tap(x=> { 
@@ -35,5 +40,10 @@ export class ProductService {
     let api = this.apiUrl  + id;
     return this.httpClient.get<Cookies>(api).pipe(tap(x=> { 
     }));
+  }
+  updateProduct(cookies:Cookies){ 
+    debugger;
+    let api = this.apiUrl + "Update"
+    return this.httpClient.post(api,cookies);
   }
 }

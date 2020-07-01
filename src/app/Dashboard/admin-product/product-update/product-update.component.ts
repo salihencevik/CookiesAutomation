@@ -6,6 +6,7 @@ import { Router ,ActivatedRoute} from '@angular/router';
 import { ValidationService } from 'src/app/Service/validation/validation.service';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import { ProductService } from 'src/app/Service/Product/product.service';
 @Component({
   selector: 'app-product-update',
   templateUrl: './product-update.component.html',
@@ -15,7 +16,7 @@ export class ProductUpdateComponent implements OnInit {
   productUpdateForm:FormGroup;
   filteredOptions: Observable<string[]>;
   productId:number;
-  constructor(private defaultService:DefaultService<Category>,public validation:ValidationService,private router:Router,private route:ActivatedRoute) { }
+  constructor(private defaultService:DefaultService<Category>,public validation:ValidationService,private router:Router,private route:ActivatedRoute,private productService:ProductService) { }
   categoryList;
   result;
   myControl = new FormControl();
@@ -32,17 +33,19 @@ export class ProductUpdateComponent implements OnInit {
       console.log(data[0])
       this.result = data[0];
       this.getControls.Name.setValue(this.result.name);
+      this.getControls.Id.setValue(this.result.id);
       this.getControls.Feature.setValue(this.result.feature);
       this.getControls.Picture.setValue(this.result.picture);
       this.getControls.Price.setValue(this.result.price);
-      this.getControls.CategoryName.setValue(this.result.categoryName); 
+      this.getControls.Category.setValue(this.result.categoryName); 
     });
     this.productUpdateForm = new FormGroup({
       Name:new FormControl("",Validators.required),
+      Id:new FormControl("",Validators.required),
       Feature:new FormControl("",[Validators.required]),
       Picture:new FormControl("",Validators.required),
       Price:new FormControl("",[Validators.required,Validators.maxLength(11)]),
-      CategoryName:new FormControl("",[Validators.required])
+      Category:new FormControl("",[Validators.required])
     });
   }
   get getControls(){
@@ -60,5 +63,15 @@ export class ProductUpdateComponent implements OnInit {
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase(); 
     return this.categoryList.filter(option => option.toLowerCase().includes(filterValue));
+  }
+  onSubmit(){
+    if (this.productUpdateForm.valid){  
+      debugger;
+      var query = String(this.productUpdateForm.value.Price);
+      this.productUpdateForm.value.Price = query;
+      this.productService.updateProduct(this.productUpdateForm.value).subscribe(data => { 
+        this.router.navigateByUrl('Admin/Product')
+      })
+    }
   }
 }

@@ -1,2 +1,8 @@
-{{user.name}}
-<button  style="margin-left: 15%;width: 350px;" class="mt-2" (click)="logout()" mat-raised-button color="warn">Çıkış</button>  
+<div class="loginFrm container mt-3" style="color: white;">
+    <h4>HOŞ GELDİNİZ</h4>
+  <h5>Sn. {{user.name}}</h5>
+    <hr style="border-color:white"> 
+    <button style="margin-left: 15%;width: 350px;"  [routerLink]="['/User/Profile',user.id]"   class="btn btn-dark mt-2">Profilim</button>   
+    <button style="margin-left: 15%;width: 350px;" [routerLink]="['/User/Saled',user.id]"  class="btn btn-warning mt-2">Önceki Siparişlerim</button>   
+    <button  style="margin-left: 15%;width: 350px;" class="mt-2" (click)="logout()" mat-raised-button color="warn">Çıkış</button>  
+  </div>  

@@ -1,0 +1,69 @@
+<div class="container" *ngIf="!isSaled && myCart.length != 0">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-header">
+                  Sepet Detay
+                </div>
+                <div *ngFor="let item of myCart" > 
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div>
+                                    <h5 class="card-title" ><span style="color:red">Ürün Adı :</span> {{item.name}}</h5>
+                                    <p class="card-text" ><span style="color:red">Ürün Özelliği :</span> {{item.feature}}</p>
+                                    <p class="card-text" ><span style="color:red">Ürün Fiyatı :</span> {{item.price}}</p>
+                                    <p class="card-text" ><span style="color:red">Adet :</span> {{item.productCount}}</p>
+                                </div>    
+                                <a [routerLink]="['/Product/Detail',item.id]"class="mt-2 btn btn-primary">Ürün Detayı</a>
+                            </div>
+                            <div class="col-md-3"> 
+                                <img style="width: 100%; height: 150px; object-fit: cover;" src="{{item.picture}}" class="card-img-top" alt="...">
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <hr style="color:pink">
+                </div> 
+              </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card" style="width: 18rem;"> 
+                <div class="card-body">
+                  <h5 class="card-title" >Sepet Özeti</h5>
+                  <p class="card-text"><span style="color:red">Toplam Fiyat :</span>{{totalPayment}}₺</p>
+                  <a (click)="payment()" class="btn btn-danger mr-2">Ödeme Yap</a>
+                </div> 
+              </div>
+        </div>
+    </div> 
+</div>
+<div *ngIf="myCart.length == 0">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+              
+                <hr style="border-color:white"> 
+                <i class="fas fa-shopping-cart" style="font-size:350px"></i>
+                <hr style="border-color:white"> 
+            </div>
+            <div class="col-md-3 mt-5">
+                <h1>Sepetiniz Boş</h1>
+            </div>
+        </div>
+      
+    </div>
+  
+</div>
+<div *ngIf = "isSaled">
+    <div style="height: 600px;" class="jumbotron text-center">
+        <h1 class="display-3">Sipariniz Alındı !</h1>
+        <p class="lead"><strong>Ürünleriniz </strong>Adresinize Gönderilecektir</p>
+        <hr>
+        <p> 
+        </p>
+        <p class="lead">
+          <a class="btn btn-primary btn-sm" role="button">Anasayfaya Dön</a>
+        </p>
+      </div>
+</div>

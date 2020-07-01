@@ -19,4 +19,9 @@ export class CartService {
     let api = this.apiUrl + "addCart" + "/" +  id + "/" + spinner + "/" + customerId;
     return this.httpClient.get(api); 
   }
+  deleteCart(id:number,customerId){
+    debugger;
+    let api = this.apiUrl + "deleteCart" + "/" +  id  + "/" + customerId;
+    return this.httpClient.delete(api); 
+  } 
 } 

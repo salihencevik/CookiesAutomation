@@ -36,7 +36,14 @@ import { AdminProductComponent } from './Dashboard/admin-product/product-list-ad
 import { ProductUpdateComponent } from './Dashboard/admin-product/product-update/product-update.component'; 
 import { CustomerListAddComponent } from './Dashboard/admin-customer/customer-list-add/customer-list-add.component';
 import { CustomerUpdateComponent } from './Dashboard/admin-customer/customer-update/customer-update.component';
-import { AdminPanelLoginComponent } from './Dashboard/admin-panel-login/admin-panel-login.component';  
+import { AdminPanelLoginComponent } from './Dashboard/admin-panel-login/admin-panel-login.component';
+import { UserProfileComponent } from './Dashboard/user-profile/user-profile.component';
+import { PaymentComponent } from './Dashboard/payment/payment.component';
+import { DialogElementsComponent } from './Dashboard/dialog-elements/dialog-elements.component';  
+import {MatDialogModule} from '@angular/material/dialog';
+import { SaledProductComponent } from './Dashboard/saled-product/saled-product.component';
+import { AdminCategoryComponent } from './Dashboard/admin-category/admin-category.component';
+import { AdminCategoryUpdateComponent } from './Dashboard/admin-category-update/admin-category-update.component';
 
 const config = new AuthServiceConfig([ 
   {
@@ -68,7 +75,17 @@ const config = new AuthServiceConfig([
     ProductDetailComponent,
     CartComponent,
     LoggedComponent, 
-    AdminProductComponent, ProductUpdateComponent, CustomerListAddComponent, CustomerUpdateComponent, AdminPanelLoginComponent,  
+    AdminProductComponent,
+     ProductUpdateComponent,
+      CustomerListAddComponent, 
+      CustomerUpdateComponent,
+       AdminPanelLoginComponent,
+        UserProfileComponent, 
+        PaymentComponent,
+         DialogElementsComponent,
+         SaledProductComponent,
+         AdminCategoryComponent,
+         AdminCategoryUpdateComponent,  
   ],
   imports: [ 
     MatSnackBarModule,
@@ -81,6 +98,7 @@ const config = new AuthServiceConfig([
     MatInputModule,
     SidebarModule,
     BrowserModule,
+    MatDialogModule,
     AppRoutingModule,
     HttpClientModule,
     MatButtonModule,
@@ -91,6 +109,9 @@ const config = new AuthServiceConfig([
     BrowserAnimationsModule, 
     NgxPaginationModule,
     MatProgressSpinnerModule
+  ],
+  entryComponents: [
+    DialogElementsComponent,
   ],
   providers: [{provide:AuthServiceConfig,useFactory:provideConfig}],
   bootstrap: [AppComponent]
